@@ -1,1 +1,25 @@
-<p>address-form works!</p>
+<div class="container mt-4">
+  <h3>Shipping Address</h3>
+  <form (ngSubmit)="submitAddress()" #form="ngForm">
+    <div class="mb-3">
+      <input class="form-control" placeholder="Full Name" [(ngModel)]= "address.fullName" name="fullName" required />
+    </div>
+    <div class="mb-3">
+      <input class="form-control" placeholder="Street" [(ngModel)]= "address.street" name="street" required />
+    </div>
+    <div class="mb-3">
+      <input class="form-control" placeholder="City" [(ngModel)]= "address.city" name="city" required />
+    </div>
+    <div class="mb-3">
+      <input class="form-control" placeholder="State" [(ngModel)]= "address.state" name="state" required />
+    </div>
+    <div class="mb-3">
+      <input class="form-control" placeholder="ZIP Code" [(ngModel)]= "address.zip" name="zip" required />
+    </div>
+    <div class="mb-3">
+      <input class="form-control" placeholder="Country" [(ngModel)]= "address.country" name="country" required />
+    </div>
+    <button class="btn btn-success" type="submit">Continue to Order Summary</button>
+  </form>
+</div>
+

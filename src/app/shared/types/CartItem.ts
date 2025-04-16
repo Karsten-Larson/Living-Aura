@@ -1,4 +1,6 @@
-class CartItem {
+import { Product } from "./Product";
+
+export class CartItem {
   private _quantity: number = 0;
 
   constructor(quantity: number, public product: Product) {
