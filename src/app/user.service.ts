@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal, Signal } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
+  constructor() {}
 
-  constructor() { }
+  loggedIn: Signal<boolean> = signal(Math.random() < 0.5);
 }

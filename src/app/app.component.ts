@@ -1,12 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ProductListComponent } from './product/product-list/product-list.component';
+import { ProductService } from './product.service';
+import { Product } from './shared/types/Product';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, NavbarComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
-export class AppComponent {
-  title = 'living-aura';
+export class AppComponent implements OnInit {
+  products!: Product[];
+
+  productService = inject(ProductService);
+
+  ngOnInit() {
+    this.productService.getProducts().subscribe((products) => {
+      this.products = products;
+    });
+  }
 }

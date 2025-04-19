@@ -1,1 +1,22 @@
-<p>product works!</p>
+<div class="container">
+    <a [routerLink]="['/products']">← Back</a>
+    <div class="card mt-2">
+        <div class="card-header">
+            <h2>{{product.name}}</h2>
+
+        </div>
+        <div class="card-body">
+            <p>{{product.description}}</p>
+            <p>Price: {{product.price | currency}}</p>
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <select id="quantity" [(ngModel)]="quantity" class="form-control">
+                    @for (qty of [1,2,3,4,5,6,7,8,9,10]; track qty) {
+                    <option [value]="qty">{{qty}}</option>
+                    }
+                </select>
+            </div>
+            <button class="mt-2 btn btn-primary" (click)="addToCart()">Add to Cart</button>
+        </div>
+    </div>
+</div>
