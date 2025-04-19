@@ -1,25 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../product.service';
+import { Component, Input } from '@angular/core';
 import { Product } from '../../shared/types/Product';
-import { CommonModule, NgFor } from '@angular/common';
+import { ProductCardComponent } from '../product-card/product-card.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-product-list',
-  imports: [CommonModule, NgFor],
+  imports: [CommonModule, ProductCardComponent],
   standalone: true,
   templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.css'
+  styleUrl: './product-list.component.css',
 })
-export class ProductListComponent implements OnInit {
-
-  products: Product[] = [];
-
-  constructor(private productService: ProductService) {}
-
-  ngOnInit(): void {
-    this.productService.getProducts().subscribe(data => {
-      this.products = data;
-    });
-  }
-
+export class ProductListComponent {
+  @Input() products!: Product[];
 }

@@ -1,11 +1,10 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, inject, NgModule, OnInit } from '@angular/core';
 import { CartService } from '../../cart.service';
 import { CartItem } from '../../shared/types/CartItem';
-import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { NgModel } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  imports: [NgIf, NgFor, CommonModule],
+  imports: [CommonModule],
   selector: 'app-cart',
   standalone: true,
   templateUrl: './cart.component.html',
@@ -15,7 +14,7 @@ export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
   total: number = 0;
 
-  constructor(private cartService: CartService) {}
+  cartService = inject(CartService);
 
   ngOnInit(): void {
     this.loadCart();

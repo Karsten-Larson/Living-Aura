@@ -1,11 +1,10 @@
 <div class="container mt-4">
   <h2>Your Shopping Cart</h2>
 
-  <div *ngIf= "cartItems.length === 0">
-    <p>Your cart is empty.</p>
-  </div>
-
-  <table class="table" *ngIf= "cartItems.length > 0">
+  @if(cartItems.length === 0) {
+  <p>Your cart is empty.</p>
+  }@else{
+  <table class="table">
     <thead>
       <tr>
         <th>Product</th>
@@ -16,32 +15,27 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor= "let item of cartItems">
+      @for (item of cartItems; track item.product.id) {
+      <tr>
         <td>{{ item.product.name }}</td>
-        <td>${{ item.product.price }}</td>
+        <td>{{ item.product.price | currency }}</td>
         <td>
-          <input
-            type="number"
-            [value]="item.quantity"
-            min="1"
-            (change)="updateQuantity(item.product.id, $event)"
-            class="form-control"
-            style="width: 80px"
-          />
+          <input type="number" [value]="item.quantity" min="1" (change)="updateQuantity(item.product.id, $event)"
+            class="form-control" style="width: 80px" />
         </td>
-        <td>${{ item.product.price * item.quantity }}</td>
+        <td>{{ item.product.price * item.quantity | currency}}</td>
         <td>
           <button (click)="removeItem(item.product.id)" class="btn btn-danger btn-sm">
             Remove
           </button>
         </td>
       </tr>
+      }
     </tbody>
   </table>
 
-  <div *ngIf= "cartItems.length > 0" class="text-end">
-    <h4>Total: ${{ total }}</h4>
+  <div class="text-end">
+    <h4>Total: {{ total | currency }}</h4>
     <button class="btn btn-primary" (click)="proceedToCheckout()">Proceed to Checkout</button>
-  </div>
+  </div>}
 </div>
-

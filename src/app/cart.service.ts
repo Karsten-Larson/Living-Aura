@@ -2,26 +2,24 @@ import { Injectable } from '@angular/core';
 import { Product } from './shared/types/Product';
 import { CartItem } from './shared/types/CartItem';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  
   private items: CartItem[] = [];
 
   getCartItems(): CartItem[] {
-    return [...this.items]; 
+    return [...this.items];
   }
 
-  addToCart(product: Product): void {
+  addToCart(product: Product, quantity = 1): void {
     const existingItem = this.items.find(
       (item) => item.product.id === product.id
     );
     if (existingItem) {
-      existingItem.quantity += 1;
+      existingItem.quantity += quantity;
     } else {
-      this.items.push(new CartItem(1, product));
+      this.items.push(new CartItem(quantity, product));
     }
   }
 
