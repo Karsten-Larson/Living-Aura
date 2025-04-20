@@ -1,0 +1,13 @@
+.text-shadow > p,
+h1 {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.image {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)),
+    url("/hero.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  height: 450px;
+}

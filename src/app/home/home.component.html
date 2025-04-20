@@ -1,1 +1,43 @@
-<p>home works!</p>
+<div class="row row-gap-3">
+    <div class="col-12 col-lg-6 image">
+        <div class="row text-white p-4">
+            <div class="col-12 col-md-6">
+                <h1 class="fw-bold">Living Aura</h1>
+                <p class="fs-5">Explore the variety our collection has to offer:</p>
+                <div class="d-flex gap-2">
+                    <button class="fs-5 btn btn-primary fw-bold" [routerLink]="['/products']">Sales/Offers</button>
+                    <button class="fs-5 btn btn-primary fw-bold" [routerLink]="['/products']">Shop Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-6">
+        <h2 class="text-center mt-2">Browse Our Collection</h2>
+
+        <div class="row row-gap-2 p-2">
+            @for (product of displayProducts; track product.id) {
+            <div class="col-12">
+                <app-product-card [product]="product"></app-product-card>
+            </div>
+            }
+        </div>
+    </div>
+    <div class="col-12 col-lg-4">
+        <h2 class="text-center">New Arrivals</h2>
+        <div class="p-2">
+            <app-product-card [product]="displayProducts[0]"></app-product-card>
+        </div>
+    </div>
+    <div class="col-12 col-lg-4">
+        <h2 class="text-center">Popular Picks</h2>
+        <div class="p-2">
+            <app-product-card [product]="displayProducts[0]"></app-product-card>
+        </div>
+    </div>
+    <div class="col-12 col-lg-4">
+        <h2 class="text-center">Spring Aura</h2>
+        <div class="p-2">
+            <app-product-card [product]="displayProducts[0]"></app-product-card>
+        </div>
+    </div>
+</div>
