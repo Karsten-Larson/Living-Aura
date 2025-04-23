@@ -9,5 +9,5 @@ import { Product } from '../../shared/types/Product';
   styleUrl: './product-card.component.css',
 })
 export class ProductCardComponent {
-  @Input() product!: Product;
+  
 }

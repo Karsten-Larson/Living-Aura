@@ -1,47 +1,26 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, inject, NgModule, OnInit } from '@angular/core';
 import { CartService } from '../../cart.service';
 import { CartItem } from '../../shared/types/CartItem';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { NgModel } from '@angular/forms';
+import { ProductListComponent } from '../../product/product-list/product-list.component';
 
 @Component({
-  imports: [NgIf, NgFor, CommonModule],
   selector: 'app-cart',
   standalone: true,
+  imports: [CommonModule, ProductListComponent],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css',
 })
-export class CartComponent implements OnInit {
-  cartItems: CartItem[] = [];
-  total: number = 0;
+export class CartComponent {
+  cartService = inject(CartService);
 
-  constructor(private cartService: CartService) {}
-
-  ngOnInit(): void {
-    this.loadCart();
+  deleteFromCart(item : any) {
+    this.cartService.delete(item);
   }
 
-  loadCart(): void {
-    this.cartItems = this.cartService.getCartItems();
-    this.total = this.cartService.getTotal();
+  constructor() {
+    
   }
-
-  updateQuantity(productId: number, event: Event): void {
-    const value = +(event.target as HTMLInputElement).value;
-    if (value > 0) {
-      this.cartService.updateQuantity(productId, value);
-      this.loadCart();
-    }
-  }
-
-  removeItem(productId: number): void {
-    this.cartService.removeFromCart(productId);
-    this.loadCart();
-  }
-
-  proceedToCheckout(): void {
-    // Navigate to address form
-    // e.g., using router: this.router.navigate(['/checkout/address']);
-    alert('Proceeding to checkout...');
-  }
+  
 }
