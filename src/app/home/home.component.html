@@ -1,4 +1,4 @@
-<div class="row row-gap-3">
+<div class="w-100 row row-gap-3">
     <div class="col-12 col-lg-6 image">
         <div class="row text-white p-4">
             <div class="col-12 col-md-6">
@@ -16,28 +16,27 @@
 
         <div class="row row-gap-2 p-2">
             @for (product of displayProducts; track product.id) {
-            <div class="col-12">
+            <div class="col-6">
                 <app-product-card [product]="product"></app-product-card>
             </div>
             }
         </div>
     </div>
+</div>
+
+<hr class="my-4" />
+
+<div class="w-100 px-2 mt-2 row">
     <div class="col-12 col-lg-4">
         <h2 class="text-center">New Arrivals</h2>
-        <div class="p-2">
-            <app-product-card [product]="displayProducts[0]"></app-product-card>
-        </div>
+        <app-product-card [product]="displayProducts[0]"></app-product-card>
     </div>
     <div class="col-12 col-lg-4">
         <h2 class="text-center">Popular Picks</h2>
-        <div class="p-2">
-            <app-product-card [product]="displayProducts[0]"></app-product-card>
-        </div>
+        <app-product-card [product]="displayProducts[0]"></app-product-card>
     </div>
     <div class="col-12 col-lg-4">
         <h2 class="text-center">Spring Aura</h2>
-        <div class="p-2">
-            <app-product-card [product]="displayProducts[0]"></app-product-card>
-        </div>
+        <app-product-card [product]="displayProducts[0]"></app-product-card>
     </div>
 </div>

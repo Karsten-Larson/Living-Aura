@@ -11,19 +11,22 @@ export class ProductService {
       1,
       'Wireless Headphones',
       99.99,
-      'Noise cancelling Bluetooth headphones'
+      'Noise cancelling Bluetooth headphones',
+      50 // Quantity
     ),
     new Product(
       2,
       'Smart Watch',
       149.99,
-      'Fitness tracking smartwatch with GPS'
+      'Fitness tracking smartwatch with GPS',
+      30 // Quantity
     ),
     new Product(
       3,
       'Laptop',
       899.99,
-      'High-performance laptop for work and play'
+      'High-performance laptop for work and play',
+      20 // Quantity
     ),
   ];
 

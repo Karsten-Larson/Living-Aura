@@ -1,0 +1,29 @@
+input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  width: 250px;
+  transition: border-color 0.3s ease;
+  outline: none;
+  margin-right: 10px;
+}
+
+input[type="text"]:focus {
+  border-color: #007bff;
+}
+
+button {
+  padding: 10px 16px;
+  font-size: 16px;
+  background-color: cadetblue;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: cornflowerblue;
+}

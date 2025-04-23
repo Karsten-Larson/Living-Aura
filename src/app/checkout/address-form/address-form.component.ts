@@ -22,8 +22,5 @@ export class AddressFormComponent {
 
   constructor(private router: Router) {}
 
-  submitAddress(): void {
-    localStorage.setItem('shippingAddress', JSON.stringify(this.address));
-    this.router.navigate(['/checkout/order']);
-  }
+
 }

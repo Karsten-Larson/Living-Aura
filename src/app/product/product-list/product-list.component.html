@@ -1,7 +1,28 @@
 <div class="row row-gap-3">
   @for(product of products; track product.id) {
-  <div class="col-12 col-md-6 col-lg-4">
+  <div class="col-12 col-lg-6">
     <app-product-card [product]="product"></app-product-card>
   </div>
   }
 </div>
+
+
+<!-- To Add Image Later -->
+<!--<img [src]= "product.img" alt="{{product.name}}"/>-->
+
+<!-- <app-product-filter (filterChanged)="updateFilter($event)"></app-product-filter>
+<p></p>
+
+<div class="products-container">
+  @for(product of filteredProducts; track product.id) {
+  <div class="product">
+    <h3>{{ product.name }}</h3>
+    <p> Description: {{ product.description }}</p>
+    <p> Price: {{ product.price }}</p>
+    <p> Available: {{ product.quantity }}</p>
+    <button [disabled]="product.quantity === 0" (click)="addToCart(product)">
+      {{ product.quantity > 0 ? 'Add to Cart' : 'Out of Stock' }}
+    </button>
+  </div>
+  }
+</div> -->

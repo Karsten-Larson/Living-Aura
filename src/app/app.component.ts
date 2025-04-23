@@ -1,13 +1,20 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
-import { ProductListComponent } from './product/product-list/product-list.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { ProductService } from './product.service';
 import { Product } from './shared/types/Product';
-import { NavbarComponent } from './navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavbarComponent],
+  imports: [
+    RouterOutlet,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NavbarComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import { Product } from './shared/types/Product';
 import { CartItem } from './shared/types/CartItem';
 
@@ -6,42 +6,77 @@ import { CartItem } from './shared/types/CartItem';
   providedIn: 'root',
 })
 export class CartService {
-  private items: CartItem[] = [];
-
-  getCartItems(): CartItem[] {
-    return [...this.items];
-  }
+  cartItems = signal<CartItem[]>(
+    JSON.parse(localStorage.getItem('cartItems') || '[]')
+  );
+  total = computed(() =>
+    this.cartItems().reduce((acc, item) => {
+      return acc + item.product.price * item.quantity;
+    }, 0)
+  );
 
   addToCart(product: Product, quantity = 1): void {
-    const existingItem = this.items.find(
+    const existingItem = this.cartItems().find(
       (item) => item.product.id === product.id
     );
     if (existingItem) {
       existingItem.quantity += quantity;
     } else {
-      this.items.push(new CartItem(quantity, product));
+      this.cartItems.set([
+        ...this.cartItems(),
+        new CartItem(quantity, product),
+      ]);
     }
+    //Keeps items in cart saved, even if you leave the site.
+    localStorage.setItem('cartItems', JSON.stringify(this.cartItems()));
   }
 
-  removeFromCart(productId: number): void {
-    this.items = this.items.filter((item) => item.product.id !== productId);
-  }
-
-  updateQuantity(productId: number, quantity: number): void {
-    const item = this.items.find((item) => item.product.id === productId);
-    if (item) {
-      item.quantity = quantity;
-    }
-  }
-
-  getTotal(): number {
-    return this.items.reduce(
-      (total, item) => total + item.product.price * item.quantity,
-      0
+  delete(item: CartItem) {
+    this.cartItems.set(
+      this.cartItems().filter((item) => item.product.id !== item.product.id)
     );
+    //Keeps items in cart saved, even if you leave the site.
+    localStorage.setItem('cartItems', JSON.stringify(this.cartItems()));
   }
 
-  clearCart(): void {
-    this.items = [];
+  incrementQuantity(id: number) {
+    let item = this.cartItems().find((item) => item.product.id === id);
+    if (item) {
+      item.quantity++;
+    }
+    //Keeps items in cart saved, even if you leave the site.
+    localStorage.setItem('cartItems', JSON.stringify(this.cartItems()));
+  }
+
+  decrementQuantity(id: number) {
+    //old decrement section
+    // let item = this.items.find((i) => i.id === id);
+    // if (item){
+    //   item.quantity--;
+    // }
+
+    //Checks when item hits 0 in qunatity and deletes
+    const item = this.cartItems().find((item) => item.product.id === id);
+    if (item) {
+      item.quantity--;
+      if (item.quantity <= 0) {
+        this.delete(item);
+      } else {
+        localStorage.setItem('cartItems', JSON.stringify(this.cartItems()));
+      }
+    }
+
+    //Keeps items in cart saved, even if you leave the site.
+    localStorage.setItem('cartItems', JSON.stringify(this.cartItems()));
+
+    // Restore quantity to the product stock
+    const productStock = JSON.parse(
+      localStorage.getItem('productStock') || '[]'
+    );
+    const product = productStock.find((p: any) => p.id === id);
+    if (product) {
+      product.quantity++;
+      localStorage.setItem('productStock', JSON.stringify(productStock));
+    }
   }
 }
