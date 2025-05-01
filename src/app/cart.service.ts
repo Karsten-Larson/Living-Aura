@@ -22,10 +22,7 @@ export class CartService {
     if (existingItem) {
       existingItem.quantity += quantity;
     } else {
-      this.cartItems.set([
-        ...this.cartItems(),
-        new CartItem(quantity, product),
-      ]);
+      this.cartItems.set([...this.cartItems(), { quantity, product }]);
     }
     //Keeps items in cart saved, even if you leave the site.
     localStorage.setItem('cartItems', JSON.stringify(this.cartItems()));

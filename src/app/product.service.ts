@@ -7,27 +7,27 @@ import { Product } from './shared/types/Product';
 })
 export class ProductService {
   private products: Product[] = [
-    new Product(
-      1,
-      'Wireless Headphones',
-      99.99,
-      'Noise cancelling Bluetooth headphones',
-      50 // Quantity
-    ),
-    new Product(
-      2,
-      'Smart Watch',
-      149.99,
-      'Fitness tracking smartwatch with GPS',
-      30 // Quantity
-    ),
-    new Product(
-      3,
-      'Laptop',
-      899.99,
-      'High-performance laptop for work and play',
-      20 // Quantity
-    ),
+    {
+      id: 1,
+      name: 'Wireless Headphones',
+      price: 99.99,
+      description: 'Noise cancelling Bluetooth headphones',
+      quantity: 50, // Quantity
+    },
+    {
+      id: 2,
+      name: 'Smart Watch',
+      price: 149.99,
+      description: 'Fitness tracking smartwatch with GPS',
+      quantity: 30, // Quantity
+    },
+    {
+      id: 3,
+      name: 'Laptop',
+      price: 899.99,
+      description: 'High-performance laptop for work and play',
+      quantity: 20, // Quantity
+    },
   ];
 
   getProducts(): Observable<Product[]> {
