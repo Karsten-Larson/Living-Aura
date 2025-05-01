@@ -8,6 +8,9 @@ import { AccountComponent } from './account/account/account.component';
 import { LoginComponent } from './account/login/login.component';
 import { RegisterComponent } from './account/register/register.component';
 import { CartPageComponent } from './cart/cart-page/cart-page.component';
+import { ContactComponent } from './contact/contact.component';
+import { AboutComponent } from './about/about.component';
+import { CheckoutComponent } from './checkout/checkout/checkout.component';
 
 export const routes: Routes = [
   { path: 'cart', component: CartPageComponent },
@@ -20,4 +23,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: AccountComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'checkout', component: CheckoutComponent },
 ];
