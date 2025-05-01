@@ -13,8 +13,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './product.component.css',
 })
 export class ProductComponent implements OnInit {
-  @Input({ required: true, transform: (value: string) => Number(value) })
-  id!: number;
+  @Input({ required: true }) id!: string;
 
   product!: Product;
   productService = inject(ProductService);
@@ -25,7 +24,7 @@ export class ProductComponent implements OnInit {
   quantity = 1;
 
   ngOnInit(): void {
-    this.productService.getProduct(this.id).subscribe((product) => {
+    this.productService.getProductById(this.id).subscribe((product) => {
       if (product) {
         this.product = product;
       } else {
@@ -37,5 +36,6 @@ export class ProductComponent implements OnInit {
   addToCart(): void {
     this.cartService.addToCart(this.product, this.quantity);
     alert('Product added to cart');
+    this.router.navigate(['/products']);
   }
 }

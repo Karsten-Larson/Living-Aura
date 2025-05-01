@@ -2,12 +2,13 @@
     <a [routerLink]="['/products']">← Back</a>
     <div class="card mt-2">
         <div class="card-header">
-            <h2>{{product.name}}</h2>
+            <h2>{{product.title}}</h2>
 
         </div>
         <div class="card-body">
             <p>{{product.description}}</p>
             <p>Price: {{product.price | currency}}</p>
+            <p>Stock: {{product.stock}}</p>
             <div class="form-group">
                 <label for="quantity">Quantity:</label>
                 <select id="quantity" [(ngModel)]="quantity" class="form-control">

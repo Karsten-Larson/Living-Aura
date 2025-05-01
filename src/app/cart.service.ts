@@ -36,7 +36,7 @@ export class CartService {
     localStorage.setItem('cartItems', JSON.stringify(this.cartItems()));
   }
 
-  incrementQuantity(id: number) {
+  incrementQuantity(id: string) {
     let item = this.cartItems().find((item) => item.product.id === id);
     if (item) {
       item.quantity++;
@@ -45,7 +45,7 @@ export class CartService {
     localStorage.setItem('cartItems', JSON.stringify(this.cartItems()));
   }
 
-  decrementQuantity(id: number) {
+  decrementQuantity(id: string) {
     //old decrement section
     // let item = this.items.find((i) => i.id === id);
     // if (item){

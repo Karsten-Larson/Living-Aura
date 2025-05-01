@@ -1,10 +1,14 @@
-<!-- <div class="card p-4 text-decoration-none" [routerLink]="['/product', product.id]"> -->
+<!-- <div class="card p-4 text-decoration-none" style="cursor: pointer" [routerLink]="['/product', product.id]"> -->
 <div class="card p-4 text-decoration-none">
-  <h3 class="fw-bold">{{ product.name }}</h3>
+
+  <a class="text-reset text-decoration-none fs-3 fw-bold" [routerLink]=" ['/product', product.id]">
+    {{ product.title }}
+  </a>
+  <hr />
   <p> Description: {{ product.description }}</p>
   <p> Price: {{ product.price }}</p>
-  <p> Available: {{ product.quantity }}</p>
-  <button class="fw-bold btn btn-primary" [disabled]="product.quantity === 0" (click)="addToCart()">
-    {{ product.quantity > 0 ? 'Add to Cart' : 'Out of Stock' }}
+  <p> Stock: {{ product.stock }}</p>
+  <button class="fw-bold btn btn-primary" [disabled]="product.stock === 0" (click)="addToCart()">
+    {{ product.stock > 0 ? 'Add to Cart' : 'Out of Stock' }}
   </button>
 </div>
