@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { CartService } from '../../cart.service';
+import { CartItem } from '../../shared/types/CartItem';
 
 @Component({
   selector: 'app-checkout',
@@ -10,6 +12,14 @@ import { RouterLink } from '@angular/router';
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css',
 })
-export class CheckoutComponent {
-  constructor() {}
+export class CheckoutComponent implements OnInit {
+  cartService = inject(CartService);
+
+  items!: CartItem[];
+  total = 0;
+
+  ngOnInit(): void {
+    this.items = this.cartService.cartItems();
+    this.total = this.cartService.total();
+  }
 }
