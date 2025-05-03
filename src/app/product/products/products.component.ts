@@ -4,10 +4,18 @@ import { Product } from '../../shared/types/Product';
 import { ProductListComponent } from '../product-list/product-list.component';
 import { FormsModule } from '@angular/forms';
 import { CartComponent } from '../../cart/cart/cart.component';
+import { ProductFilterComponent } from '../product-filter/product-filter.component';
+import { ProductSearchComponent } from '../product-search/product-search.component';
 
 @Component({
   selector: 'app-products',
-  imports: [FormsModule, ProductListComponent, CartComponent],
+  imports: [
+    FormsModule,
+    ProductListComponent,
+    CartComponent,
+    ProductFilterComponent,
+    ProductSearchComponent,
+  ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })

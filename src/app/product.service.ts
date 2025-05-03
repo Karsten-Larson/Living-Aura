@@ -21,4 +21,21 @@ export class ProductService {
       map((products) => products.find((product: Product) => product.id === id))
     );
   }
+
+  getProductsByCategory(category: string): Observable<Product[]> {
+    return this.getProducts().pipe(
+      map((products) =>
+        products.filter((product: Product) => product.category === category)
+      )
+    );
+  }
+
+  getCategories(): Observable<string[]> {
+    return this.getProducts().pipe(
+      map((products) => {
+        const categories = products.map((product: Product) => product.category);
+        return Array.from(new Set(categories));
+      })
+    );
+  }
 }
