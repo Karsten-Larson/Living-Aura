@@ -6,74 +6,81 @@ import { CartItem } from './shared/types/CartItem';
   providedIn: 'root',
 })
 export class CartService {
-  cartItems = signal<CartItem[]>(
+  private items = signal<CartItem[]>(
     JSON.parse(localStorage.getItem('cartItems') || '[]')
   );
+  cartItems = computed(() =>
+    this.items()
+      .slice()
+      .sort((a, b) => a.product.title.localeCompare(b.product.title))
+  );
   total = computed(() =>
-    this.cartItems().reduce((acc, item) => {
+    this.items().reduce((acc, item) => {
       return acc + item.product.price * item.quantity;
     }, 0)
   );
 
+  private updateItem(id: string, fn: (item: CartItem) => void) {
+    this.items.update((items) => {
+      const item = items.find((i) => i.product.id === id);
+      if (item) {
+        fn(item);
+      }
+      return [...items.filter((i) => i.product.id != id), item] as CartItem[];
+    });
+  }
+
+  private saveItems() {
+    localStorage.setItem('cartItems', JSON.stringify(this.items()));
+  }
+
   addToCart(product: Product, quantity = 1): void {
-    const existingItem = this.cartItems().find(
-      (item) => item.product.id === product.id
-    );
-    if (existingItem) {
-      existingItem.quantity += quantity;
-    } else {
-      this.cartItems.set([...this.cartItems(), { quantity, product }]);
-    }
-    //Keeps items in cart saved, even if you leave the site.
-    localStorage.setItem('cartItems', JSON.stringify(this.cartItems()));
+    this.items.update((items) => {
+      const existingItem = items.find((item) => item.product.id === product.id);
+      if (existingItem) {
+        if (existingItem.quantity + quantity > product.stock) {
+          alert('Not enough stock available');
+          return items;
+        }
+
+        existingItem.quantity += quantity;
+        return items;
+      } else {
+        return [...items, { quantity, product }];
+      }
+    });
+
+    this.saveItems();
   }
 
   delete(item: CartItem) {
-    this.cartItems.set(
-      this.cartItems().filter((item) => item.product.id !== item.product.id)
+    this.items.update((items) =>
+      items.filter((i) => i.product.id != item.product.id)
     );
-    //Keeps items in cart saved, even if you leave the site.
-    localStorage.setItem('cartItems', JSON.stringify(this.cartItems()));
+
+    this.saveItems();
   }
 
   incrementQuantity(id: string) {
-    let item = this.cartItems().find((item) => item.product.id === id);
-    if (item) {
-      item.quantity++;
-    }
-    //Keeps items in cart saved, even if you leave the site.
-    localStorage.setItem('cartItems', JSON.stringify(this.cartItems()));
+    this.updateItem(id, (item) => {
+      if (item.quantity < item.product.stock) {
+        item.quantity++;
+      }
+    });
+
+    this.saveItems();
   }
 
   decrementQuantity(id: string) {
-    //old decrement section
-    // let item = this.items.find((i) => i.id === id);
-    // if (item){
-    //   item.quantity--;
-    // }
-
-    //Checks when item hits 0 in qunatity and deletes
-    const item = this.cartItems().find((item) => item.product.id === id);
-    if (item) {
-      item.quantity--;
-      if (item.quantity <= 0) {
-        this.delete(item);
-      } else {
-        localStorage.setItem('cartItems', JSON.stringify(this.cartItems()));
+    this.updateItem(id, (item) => {
+      if (item.quantity <= 1) {
+        item.quantity = 1;
+        return;
       }
-    }
 
-    //Keeps items in cart saved, even if you leave the site.
-    localStorage.setItem('cartItems', JSON.stringify(this.cartItems()));
+      item.quantity--;
+    });
 
-    // Restore quantity to the product stock
-    const productStock = JSON.parse(
-      localStorage.getItem('productStock') || '[]'
-    );
-    const product = productStock.find((p: any) => p.id === id);
-    if (product) {
-      product.quantity++;
-      localStorage.setItem('productStock', JSON.stringify(productStock));
-    }
+    this.saveItems();
   }
 }

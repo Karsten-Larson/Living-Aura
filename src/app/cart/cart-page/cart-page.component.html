@@ -1,3 +1,19 @@
-<div class="container pt-3">
-    <app-cart></app-cart>
+<div class="container py-3">
+    <div class="row row-gap-3">
+        <div class="col-12 col-lg-6 order-lg-last">
+            <div class="card p-4 sticky-top" style="top: 10px;">
+                <h2>Continue Shopping?</h2>
+                <div class="mt-4">
+                    <button class="btn btn-primary py-3 fw-bold mt-2 w-100" [routerLink]="['/products']">Back to
+                        Gallery</button>
+                </div>
+            </div>
+        </div>
+
+        <hr class="d-block d-lg-none" />
+
+        <div class="col-12 col-lg-6 order-lg-first">
+            <app-cart></app-cart>
+        </div>
+    </div>
 </div>

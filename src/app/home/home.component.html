@@ -14,29 +14,27 @@
     <div class="col-12 col-lg-6">
         <h2 class="text-center mt-2">Browse Our Collection</h2>
 
-        <div class="row row-gap-2 p-2">
-            @for (product of displayProducts; track product.id) {
-            <div class="col-6">
-                <app-product-card [product]="product"></app-product-card>
-            </div>
-            }
-        </div>
+        <app-product-list [products]="displayProducts.slice(0,2)"></app-product-list>
     </div>
 </div>
 
 <hr class="my-4" />
 
-<div class="w-100 px-2 mt-2 row">
-    <div class="col-12 col-lg-4">
+<div class="w-100 px-2 mt-2 row row-gap-3">
+    <div class="col-12 col-md-6 col-lg-3">
         <h2 class="text-center">New Arrivals</h2>
-        <app-product-card [product]="displayProducts[0]"></app-product-card>
+        <app-product-card [product]="displayProducts[2]"></app-product-card>
     </div>
-    <div class="col-12 col-lg-4">
+    <div class="col-12 col-md-6 col-lg-3">
         <h2 class="text-center">Popular Picks</h2>
-        <app-product-card [product]="displayProducts[0]"></app-product-card>
+        <app-product-card [product]="displayProducts[3]"></app-product-card>
     </div>
-    <div class="col-12 col-lg-4">
+    <div class="col-12 col-md-6 col-lg-3">
         <h2 class="text-center">Spring Aura</h2>
-        <app-product-card [product]="displayProducts[0]"></app-product-card>
+        <app-product-card [product]="displayProducts[4]"></app-product-card>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3">
+        <h2 class="text-center">Home Office</h2>
+        <app-product-card [product]="displayProducts[5]"></app-product-card>
     </div>
 </div>

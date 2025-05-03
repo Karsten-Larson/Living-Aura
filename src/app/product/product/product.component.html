@@ -1,23 +1,32 @@
 <div class="container pt-3">
-    <a [routerLink]="['/products']">← Back</a>
-    <div class="card mt-2">
-        <div class="card-header">
-            <h2>{{product.title}}</h2>
+    <button class='btn btn-link' (click)="goBack()">← Back</button>
 
-        </div>
-        <div class="card-body">
-            <p>{{product.description}}</p>
-            <p>Price: {{product.price | currency}}</p>
-            <p>Stock: {{product.stock}}</p>
-            <div class="form-group">
-                <label for="quantity">Quantity:</label>
-                <select id="quantity" [(ngModel)]="quantity" class="form-control">
-                    @for (qty of [1,2,3,4,5,6,7,8,9,10]; track qty) {
-                    <option [value]="qty">{{qty}}</option>
-                    }
-                </select>
+    <div class="row mt-2">
+        <div class="align-self-center d-none d-lg-block col-lg-6 col-xl-4 card p-4">
+            <div class="mx-auto w-75">
+                <img [src]="product.img_url" alt="{{product.title}}" class="img-fluid" />
             </div>
-            <button class="mt-2 btn btn-primary" (click)="addToCart()">Add to Cart</button>
+        </div>
+
+        <div class="col-12 col-lg-6 col-xl-8">
+            <div class="card p-4">
+                <img [src]="product.img_url" alt="{{product.title}}" class="card-img-top mb-2 d-block d-lg-none" />
+
+                <h2 class="fw-bold">{{product.title}}</h2>
+                <hr />
+                <p>{{product.description}}</p>
+                <p>Price: {{product.price | currency}}</p>
+                <p>Stock: {{product.stock}}</p>
+                <div class="form-group">
+                    <label for="quantity">Quantity:</label>
+                    <select id="quantity" [(ngModel)]="quantity" class="form-control">
+                        @for (qty of qtOptions; track qty) {
+                        <option [value]="qty">{{qty}}</option>
+                        }
+                    </select>
+                </div>
+                <button class="mt-2 btn btn-primary" (click)="addToCart()">Add to Cart</button>
+            </div>
         </div>
     </div>
 </div>
