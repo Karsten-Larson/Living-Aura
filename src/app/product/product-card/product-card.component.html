@@ -1,10 +1,20 @@
-<!-- <div class="card p-4 text-decoration-none" [routerLink]="['/product', product.id]"> -->
-<div class="card p-4 text-decoration-none">
-  <h3 class="fw-bold">{{ product.name }}</h3>
-  <p> Description: {{ product.description }}</p>
-  <p> Price: {{ product.price }}</p>
-  <p> Available: {{ product.quantity }}</p>
-  <button class="fw-bold btn btn-primary" [disabled]="product.quantity === 0" (click)="addToCart()">
-    {{ product.quantity > 0 ? 'Add to Cart' : 'Out of Stock' }}
+<!-- <div class="card p-4 text-decoration-none" style="cursor: pointer" [routerLink]="['/product', product.id]"> -->
+<div class="card p-4" style="cursor: pointer" [routerLink]=" ['/product', product.id]">
+  <img class="mb-2 card-img-top" [src]="product.img_url" alt="{{ product.title }}" />
+
+  <h3 class="fw-bold">{{ product.title }}</h3>
+
+  <hr />
+
+  <p><strong>{{ product.price | currency }}</strong> - {{product.stock}} available</p>
+
+  <!-- Buttons redirect to cart based on screen size -->
+  <button class="d-none d-lg-block fw-bold btn btn-primary" [disabled]="product.stock === 0"
+    (click)="$event.stopPropagation(); addToCart()">
+    {{ product.stock > 0 ? 'Add to Cart' : 'Out of Stock' }}
+  </button>
+  <button class="d-block d-lg-none fw-bold btn btn-primary" [disabled]="product.stock === 0"
+    (click)="$event.stopPropagation(); addToCart(); redirectToCart();">
+    {{ product.stock > 0 ? 'Add to Cart' : 'Out of Stock' }}
   </button>
 </div>

@@ -1,6 +1,6 @@
 import { Component, inject, Input } from '@angular/core';
 import { Product } from '../../shared/types/Product';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../cart.service';
 
@@ -15,9 +15,13 @@ export class ProductCardComponent {
   @Input() product!: Product;
 
   cartService = inject(CartService);
+  router = inject(Router);
 
   addToCart() {
     this.cartService.addToCart(this.product, 1);
-    this.product.quantity--;
+  }
+
+  redirectToCart() {
+    this.router.navigate(['/cart']);
   }
 }

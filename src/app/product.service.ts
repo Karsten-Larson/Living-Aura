@@ -1,41 +1,24 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { map, Observable, of } from 'rxjs';
 import { Product } from './shared/types/Product';
+import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  private products: Product[] = [
-    new Product(
-      1,
-      'Wireless Headphones',
-      99.99,
-      'Noise cancelling Bluetooth headphones',
-      50 // Quantity
-    ),
-    new Product(
-      2,
-      'Smart Watch',
-      149.99,
-      'Fitness tracking smartwatch with GPS',
-      30 // Quantity
-    ),
-    new Product(
-      3,
-      'Laptop',
-      899.99,
-      'High-performance laptop for work and play',
-      20 // Quantity
-    ),
-  ];
+  private firestore = inject(Firestore);
+  private userCollection = collection(this.firestore, 'products');
 
   getProducts(): Observable<Product[]> {
-    return of(this.products);
+    return collectionData(this.userCollection, { idField: 'id' }) as Observable<
+      Product[]
+    >;
   }
 
-  getProduct(id: number): Observable<Product | undefined> {
-    const product = this.products.find((p) => p.id === id);
-    return of(product);
+  getProductById(id: string): Observable<Product | undefined> {
+    return this.getProducts().pipe(
+      map((products) => products.find((product: Product) => product.id === id))
+    );
   }
 }
