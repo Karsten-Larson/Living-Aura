@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../../cart.service';
 import { CartItem } from '../../shared/types/CartItem';
+import { AddressFormComponent } from '../address-form/address-form.component';
 
 @Component({
   selector: 'app-checkout',
-  imports: [CommonModule, RouterLink, FormsModule],
+  imports: [CommonModule, RouterLink, FormsModule, AddressFormComponent],
   standalone: true,
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css',
