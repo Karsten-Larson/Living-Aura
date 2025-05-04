@@ -1,8 +1,12 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+<<<<<<< HEAD
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { routes } from './app.routes';
+=======
+import { getAuth, provideAuth } from '@angular/fire/auth';
+>>>>>>> 73a88d2 (Added my config)
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCzRN8aPRSP6oNP2kR7sztL_ZqqyzfJTVk',
