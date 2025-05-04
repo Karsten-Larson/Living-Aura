@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import {
   Auth,
   createUserWithEmailAndPassword,
@@ -32,7 +32,7 @@ export class AuthService {
     signInWithEmailAndPassword(this.auth, email, password).then(
       () => {
         localStorage.setItem('token', 'true');
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/']);
       },
       (err) => {
         alert(`Something went wrong: ${err.message} `);
@@ -90,7 +90,12 @@ export class AuthService {
       });
   }
 
-  getUser(): User | null {
-    return this.auth.currentUser;
+  user = signal<User | null>(null);
+  loggedIn = computed<boolean>(() => this.user() !== null);
+
+  constructor() {
+    this.auth.onAuthStateChanged((user) => {
+      this.user.set(user);
+    });
   }
 }

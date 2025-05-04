@@ -1,8 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { RegisterUser } from '../shared/RegisterUser';
-import { UserService } from '../../user.service';
-import { User } from '../../shared/types/User';
-import { Router } from '@angular/router';
 import { AuthService, UserInfo } from '../../auth.service';
 import { FormsModule } from '@angular/forms';
 

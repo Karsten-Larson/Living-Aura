@@ -1,10 +1,9 @@
-import { CommonModule, NgClass, NgIf } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
-import { FormsModule, NgModel } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-contact',
-  imports: [FormsModule, NgIf],
+  imports: [FormsModule],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css',
 })
