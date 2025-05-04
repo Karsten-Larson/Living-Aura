@@ -1,37 +1,50 @@
 import { Component, inject } from '@angular/core';
-import { RegisterFormComponent } from '../register-form/register-form.component';
-import { RegisterUser } from '../shared/RegisterUser';
-import { UserService } from '../../user.service';
-import { User } from '../../shared/types/User';
-import { Router } from '@angular/router';
+import { AuthService, UserInfo } from '../../auth.service';
+import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register',
-  imports: [RegisterFormComponent],
+  imports: [FormsModule, RouterLink],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
-  userService = inject(UserService);
-  router = inject(Router);
+  user: UserInfo = {
+    fname: '',
+    lname: '',
+    email: '',
+    password: '',
+  };
 
-  register(user: RegisterUser): void {
-    // Add user registration logic here
-    console.log('User registered:', user);
+  private authService = inject(AuthService);
 
-    const newUser = new User(
-      user.firstName,
-      user.lastName,
-      user.birthDate,
-      user.email,
-      user.password
-    );
+  register() {
+    if (this.user.fname == '') {
+      alert('Please enter your first name');
+      return;
+    }
+    if (this.user.lname == '') {
+      alert('Please enter your Last name');
+      return;
+    }
 
-    this.userService.users.push(newUser);
-    this.userService.currentUser.set(newUser);
+    if (this.user.email == '') {
+      alert('Please enter email');
+      return;
+    }
 
-    alert('Account successfully created');
+    if (this.user.password == '') {
+      alert('Please enter your password');
+      return;
+    }
 
-    this.router.navigate(['/']);
+    this.authService.register(this.user);
+    this.user = {
+      fname: '',
+      lname: '',
+      email: '',
+      password: '',
+    };
   }
 }
