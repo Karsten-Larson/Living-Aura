@@ -1,5 +1,5 @@
 <div class="card p-4">
-  <div class="d-grid gap-1" [style]="overflow ? 'height: 60vh; overflow-y: auto;' : ''">
+  <div [style]="overflow ? 'height: 60vh; overflow-y: auto;' : ''">
     @for(item of cartService.cartItems(); track item) {
     <div class="cart-item">
       <div class="row" style='cursor: pointer;' [routerLink]="['/product', item.product.id]">
@@ -24,11 +24,13 @@
     }
   </div>
 
-  <hr />
-
-  <div class="mt-2">
-    <h3> Total: {{cartService.total() | currency}}</h3>
-    <button class="btn btn-primary py-3 fw-bold mt-2 w-100" [class]="cartService.total() === 0 ? 'd-none' : ''">Proceed
-      to Checkout</button>
+  <div [class]="overflow ? '' : 'd-lg-none'">
+    <hr />
+    <div class="mt-2">
+      <h3> Total: {{cartService.total() | currency}}</h3>
+      <button class="btn btn-primary py-3 fw-bold mt-2 w-100" [class]="cartService.total() === 0 ? 'd-none' : ''"
+        [routerLink]="['/checkout']">Proceed
+        to Checkout</button>
+    </div>
   </div>
 </div>

@@ -3,9 +3,18 @@
         <div class="col-12 col-lg-6 order-lg-last">
             <div class="card p-4 sticky-top" style="top: 10px;">
                 <h2>Continue Shopping?</h2>
-                <div class="mt-4">
+                <div class="mt-4 mb-lg-4">
                     <button class="btn btn-primary py-3 fw-bold mt-2 w-100" [routerLink]="['/products']">Back to
                         Gallery</button>
+                </div>
+
+                <hr class="d-none d-lg-block" />
+
+                <div class="mt-2 d-none d-lg-block">
+                    <h3> Total: {{cartService.total() | currency}}</h3>
+                    <button class="btn btn-primary py-3 fw-bold mt-2 w-100"
+                        [class]="cartService.total() === 0 ? 'd-none' : ''" [routerLink]="['/checkout']">Proceed
+                        to Checkout</button>
                 </div>
             </div>
         </div>
