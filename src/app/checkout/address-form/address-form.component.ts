@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Address } from '../../shared/types/Address';
 
 @Component({
   selector: 'app-address-form',
@@ -11,16 +11,5 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './address-form.component.css',
 })
 export class AddressFormComponent {
-  address = {
-    fullName: '',
-    street: '',
-    city: '',
-    state: '',
-    zip: '',
-    country: '',
-  };
-
-  constructor(private router: Router) {}
-
-
+  @Input() address!: Address;
 }

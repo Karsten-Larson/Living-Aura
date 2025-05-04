@@ -8,11 +8,17 @@
 
         <div class="card-body">
           <h3 class="text-center">Shipping Address</h3>
-          <app-address-form></app-address-form>
+          <app-address-form [address]="shippingAddress"></app-address-form>
 
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="sameAsShipping" [(ngModel)]="shippingSameAsBilling" />
+            <label class="form-check-label" for="sameAsShipping">Billing address same as shipping</label>
+          </div>
+
+          @if(!shippingSameAsBilling){
           <hr />
           <h3 class="text-center">Billing Address</h3>
-          <app-address-form></app-address-form>
+          <app-address-form [address]="billingAddress"></app-address-form>}
         </div>
       </div>
     </div>

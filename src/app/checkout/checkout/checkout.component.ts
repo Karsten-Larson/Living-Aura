@@ -5,6 +5,8 @@ import { RouterLink } from '@angular/router';
 import { CartService } from '../../cart.service';
 import { CartItem } from '../../shared/types/CartItem';
 import { AddressFormComponent } from '../address-form/address-form.component';
+import { Address } from '../../shared/types/Address';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-checkout',
@@ -15,9 +17,29 @@ import { AddressFormComponent } from '../address-form/address-form.component';
 })
 export class CheckoutComponent implements OnInit {
   cartService = inject(CartService);
+  authService = inject(AuthService);
 
   items!: CartItem[];
   total = 0;
+
+  shippingAddress: Address = {
+    firstName: this.authService.user()?.displayName?.split(' ')[0] || '',
+    lastName: this.authService.user()?.displayName?.split(' ')[1] || '',
+    address: '',
+    city: '',
+    state: '',
+    zip: '',
+  };
+  billingAddress: Address = {
+    firstName: this.authService.user()?.displayName?.split(' ')[0] || '',
+    lastName: this.authService.user()?.displayName?.split(' ')[1] || '',
+    address: '',
+    city: '',
+    state: '',
+    zip: '',
+  };
+
+  shippingSameAsBilling = false;
 
   ngOnInit(): void {
     this.items = this.cartService.cartItems();
