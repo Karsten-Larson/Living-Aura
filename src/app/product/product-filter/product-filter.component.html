@@ -1,6 +1,9 @@
-<input
-  type="text"
-  [(ngModel)]="searchText"
-  placeholder="Search For Product"
-/>
-<button (click)="onSearch()">Search</button>
+<div class="d-flex align-items-start">
+  <select class="form-select" aria-label="Category filter" [(ngModel)]="tag">
+    <option selected>Select a category</option>
+    @for (category of categories; track category) {
+    <option [value]="category">{{ category | titlecase }}</option>
+    }
+  </select>
+  <button class="btn btn-primary ms-2" (click)="onFilter()">Filter</button>
+</div>
