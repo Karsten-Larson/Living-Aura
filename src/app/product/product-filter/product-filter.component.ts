@@ -11,8 +11,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './product-filter.component.css',
 })
 export class ProductFilterComponent implements OnInit {
-  @Output() filterChanged = new EventEmitter<string>();
-  tag = '';
+  @Output() filterChanged = new EventEmitter<string | null>();
+  tag = 'Select a category';
 
   productService = inject(ProductService);
 
@@ -25,6 +25,6 @@ export class ProductFilterComponent implements OnInit {
   }
 
   onFilter() {
-    this.filterChanged.emit(this.tag);
+    this.filterChanged.emit(this.tag === 'Select a category' ? null : this.tag);
   }
 }

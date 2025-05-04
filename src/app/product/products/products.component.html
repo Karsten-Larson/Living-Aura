@@ -3,13 +3,13 @@
         <div class="col-12 col-lg-8">
             <div class="mb-3 d-flex">
                 <div class="me-4">
-                    <app-product-search></app-product-search>
+                    <app-product-search (searchChanged)="searchEvent($event)"></app-product-search>
                 </div>
                 <div>
-                    <app-product-filter></app-product-filter>
+                    <app-product-filter (filterChanged)="categoryEvent($event)"></app-product-filter>
                 </div>
             </div>
-            <app-product-list [products]="products"></app-product-list>
+            <app-product-list [products]="products()"></app-product-list>
         </div>
         <div class="d-none d-lg-block col-lg-4">
             <app-cart class="sticky-top" style="top: 10px" [overflow]="true"></app-cart>

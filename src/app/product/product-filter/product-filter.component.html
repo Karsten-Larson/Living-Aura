@@ -1,5 +1,5 @@
 <div class="d-flex align-items-start">
-  <select class="form-select" aria-label="Category filter">
+  <select class="form-select" aria-label="Category filter" [(ngModel)]="tag">
     <option selected>Select a category</option>
     @for (category of categories; track category) {
     <option [value]="category">{{ category | titlecase }}</option>
