@@ -11,6 +11,7 @@ import { CartPageComponent } from './cart/cart-page/cart-page.component';
 import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
 import { CheckoutComponent } from './checkout/checkout/checkout.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 export const routes: Routes = [
   { path: 'cart', component: CartPageComponent },
@@ -22,8 +23,9 @@ export const routes: Routes = [
   { path: 'product/:id', component: ProductComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: AccountComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'about', component: AboutComponent },
   { path: 'checkout', component: CheckoutComponent },
+  {path: 'forgot-password', component: ForgotPasswordComponent,
+  },
 ];

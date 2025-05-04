@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { UserService } from '../../user.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-account',
@@ -9,11 +10,12 @@ import { Router } from '@angular/router';
   styleUrl: './account.component.css',
 })
 export class AccountComponent {
-  userService = inject(UserService);
-  router = inject(Router);
+  private authService = inject(AuthService);
 
-  signout() {
-    this.userService.signout();
-    this.router.navigate(['/']);
+  logout() {
+    this.authService.logout();
   }
+
+  user = this.authService.getUser();
 }
+
