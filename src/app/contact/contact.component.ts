@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Message } from '../shared/types/Message';
+import { Firestore, addDoc, collection } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-contact',
@@ -8,7 +10,10 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './contact.component.css',
 })
 export class ContactComponent {
-  contact = {
+  private firestore = inject(Firestore);
+  private messagesCollection = collection(this.firestore, 'messages');
+
+  contact: Message = {
     name: '',
     email: '',
     message: '',
@@ -16,8 +21,28 @@ export class ContactComponent {
   submitted = false;
 
   onSubmit() {
-    console.log('Form submitted:', this.contact);
-    this.submitted = true;
-    this.contact = { name: '', email: '', message: '' };
+    // Save the message to Firestore
+    const messageDoc = {
+      name: this.contact.name,
+      email: this.contact.email,
+      message: this.contact.message,
+      timestamp: new Date(),
+    };
+
+    addDoc(this.messagesCollection, messageDoc)
+      .then(() => {
+        alert('Message sent successfully');
+        this.submitted = true;
+      })
+      .catch((error) => {
+        alert(`Error sending message: ${error}`);
+      });
+
+    // Reset the form
+    this.contact = {
+      name: '',
+      email: '',
+      message: '',
+    };
   }
 }

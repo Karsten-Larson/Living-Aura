@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { AddressFormComponent } from './checkout/address-form/address-form.component';
-import { OrderFormComponent } from './checkout/order-form/order-form.component';
 import { ProductsComponent } from './product/products/products.component';
 import { ProductComponent } from './product/product/product.component';
 import { HomeComponent } from './home/home.component';
@@ -12,11 +11,10 @@ import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
 import { CheckoutComponent } from './checkout/checkout/checkout.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ThankYouComponent } from './checkout/thank-you/thank-you.component';
 
 export const routes: Routes = [
   { path: 'cart', component: CartPageComponent },
-  { path: 'checkout/address', component: AddressFormComponent },
-  { path: 'checkout/order', component: OrderFormComponent },
   { path: '', component: HomeComponent },
   { path: 'profile', component: AccountComponent },
   { path: 'products', component: ProductsComponent },
@@ -26,6 +24,6 @@ export const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'about', component: AboutComponent },
   { path: 'checkout', component: CheckoutComponent },
-  {path: 'forgot-password', component: ForgotPasswordComponent,
-  },
+  { path: 'checkout/thank-you', component: ThankYouComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
 ];

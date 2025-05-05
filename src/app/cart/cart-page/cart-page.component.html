@@ -1,6 +1,6 @@
 <div class="container py-3">
     <div class="row row-gap-3">
-        <div class="col-12 col-lg-6 order-lg-last">
+        <div class="col-12 order-lg-last" [class]="cartService.cartItems().length === 0 ? '' : 'col-lg-6'">
             <div class="card p-4 sticky-top" style="top: 10px;">
                 <h2>Continue Shopping?</h2>
                 <div class="mt-4 mb-lg-4">
@@ -21,7 +21,7 @@
 
         <hr class="d-block d-lg-none" />
 
-        <div class="col-12 col-lg-6 order-lg-first">
+        <div class="col-12 col-lg-6 order-lg-first" [class]="cartService.cartItems().length === 0 ? 'd-none' : ''">
             <app-cart></app-cart>
         </div>
     </div>
