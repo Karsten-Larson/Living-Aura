@@ -5,6 +5,7 @@ import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProductService } from './product.service';
 import { Product } from './shared/types/Product';
+import { FooterComponent } from './footer/footer.component';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ import { Product } from './shared/types/Product';
     FormsModule,
     ReactiveFormsModule,
     NavbarComponent,
+    FooterComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
