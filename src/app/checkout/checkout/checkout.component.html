@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container py-3">
   <div class="row row-gap-2">
     <div class="col-md-7">
       <div class="card">
@@ -19,8 +19,35 @@
           <hr />
           <h3 class="text-center">Billing Address</h3>
           <app-address-form [address]="billingAddress"></app-address-form>}
+
+          <hr />
+          <h3 class="text-center">Payment Information</h3>
+          <div class="mb-3">
+            <label for="cardNumber" class="form-label">Card Number</label>
+            <input type="text" class="form-control" id="cardNumber" [(ngModel)]="paymentInfo.cardNumber"
+              placeholder="1234 5678 9012 3456" />
+          </div>
+          <div class="mb-3">
+            <label for="cardName" class="form-label">Name on Card</label>
+            <input type="text" class="form-control" id="cardName" [(ngModel)]="paymentInfo.cardName"
+              placeholder="John Doe" />
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="expiryDate" class="form-label">Expiry Date</label>
+              <input type="text" class="form-control" id="expiryDate" [(ngModel)]="paymentInfo.expiryDate"
+                placeholder="MM/YY" />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="cvv" class="form-label">CVV</label>
+              <input type="text" class="form-control" id="cvv" [(ngModel)]="paymentInfo.cvv" placeholder="123" />
+            </div>
+          </div>
         </div>
       </div>
+      @if (total > 0) {
+      <div class="text-center"><button class="btn btn-primary mt-3" (click)="placeOrder()">Complete Order</button></div>
+      }
     </div>
     <div class="col-md-5 order-first order-md-last">
       <div class="card">
